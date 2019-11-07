@@ -1,0 +1,76 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BindingToCollections"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Custom="using:Microsoft.Xaml.Interactivity" xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core"
+    x:Class="BindingToCollections.MainPage"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.DataContext>
+        <local:Car/>
+    </Page.DataContext>
+    <StackPanel>
+        <Button Click="ButtonBase_OnClick" Content="Go to master/detail view">
+
+        </Button>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Background="AliceBlue" Width="200" HorizontalAlignment="left">
+                <TextBlock Text="Hardcoded ListView" FontSize="20"/>
+                <ListView>
+                    <ListViewItem Content="Toyota"/>
+                    <ListViewItem Content="BMW"/>
+                    <ListViewItem Content="Opel"/>
+                    <ListViewItem Content="Volvo"/>
+                    <ListViewItem Content="VW"/>
+                </ListView>
+            </StackPanel>
+            <StackPanel Background="AntiqueWhite">
+                <TextBlock Text="ListView BRandNames" FontSize="20"/>
+                <ListView ItemsSource="{Binding BrandNames}"/>
+            </StackPanel>
+            <StackPanel Background="Aquamarine" Orientation="Vertical">
+                <TextBlock Text="ListView-Add to ObservableCollection" FontSize="20"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Brand" FontSize="20"/>
+                    <TextBox Text="{Binding Brand, Mode=TwoWay}" Width="200" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <ListView ItemsSource="{Binding BrandNames}"/>
+            </StackPanel>
+            <StackPanel Spacing="20" Orientation="Vertical"  Background="Chocolate">
+                <TextBlock Text="ListView-with Car objects -datatemplate" FontSize="20" />
+                <ListView ItemsSource="{Binding Cars}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{Binding ImageSource}" Height="80" Width="80"/>
+                                <TextBlock Text="{Binding Brand}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                </ListView>
+            </StackPanel>
+            
+
+
+        </StackPanel>
+        <StackPanel Background="Cornsilk">
+            <TextBlock Text="GridView" FontSize="20"/>
+            <GridView ItemsSource="{Binding Cars}" >
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel HorizontalAlignment="Center">
+                            <Image Source="{Binding ImageSource}" 
+                               Height="200" Width="200"/>
+                            <TextBlock FontSize="48" Text="{Binding Brand}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </StackPanel>
+    </StackPanel>
+
+
+</Page>
